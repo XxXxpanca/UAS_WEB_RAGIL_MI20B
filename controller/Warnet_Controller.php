@@ -3,18 +3,19 @@
     include '../Database.php';
     include '../model/Warnet_model.php';
 
-    // class WarnetController{
-    //     private $model;
+    class WarnetController{
+        public $model;
 
-    //     function __construct()
-    //     {
+        function __construct()
+        {
             $db = new Database();
             $conn = $db->DBConnect();
-            $model = new warnet_model($conn);
-        // }
+            $this->model = new warnet_model($conn); 
+        }
+           function index (){
+            $hasil = $this->model->tampil_data();
 
-        // function index(){
-            $hasil = $model->tampil_data();
-    //     }
-    // }
+            return $hasil;
+        }
+    }
 ?>

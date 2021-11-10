@@ -1,6 +1,9 @@
 <?php
     include '../controller/Warnet_Controller.php';
 
+    $ctrl = new WarnetController();
+
+    $hasil = $ctrl->index();
 ?>
 
 <!DOCTYPE html>
