@@ -1,13 +1,9 @@
 <?php
 include '../controller/Warnet_Controller.php';
-
 $ctrl = new WarnetController();
-$hasil = $ctrl->index();
-$id = $_GET['id_billing'];
-$data = $ctrl->getData($id);
-
-
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,55 +25,72 @@ $data = $ctrl->getData($id);
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header bg-white text-uppercase">
-                            <div class="h3 text-center">Edit Billing</div>
+                            <div class="h3 text-center">Tambah Data Billing</div>
                         </div>
                         <div class="card-body">
-                            <form action="edit_proses.php?id_billing=<?= $data['Id_billing'] ?>" method="post">
+                            <form action="<?php $ctrl->simpanData();?>" method="post">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <small>ID Billing</small>
-                                            <input type="text" name="id_billing" id="id_billing" class="form-control" placeholder="WRS-001-2021" value="<?= $data['Id_billing'] ?>">
+                                            <input type="text" name="id_billing" id="id_billing" class="form-control" placeholder="SWR-001-2021">
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+
+                                    <div class="col-lg-12 mt-3">
                                         <div class="form-group">
-                                            <small>Nama</small>
-                                            <input type="text" name="nama_penyewa" id="nama_penyewa" class="form-control" value="<?= $data['nama_penyewa'] ?>">
+                                            <small>Nama Penyewa</small>
+                                            <input type="text" name="nama_penyewa" id="nama_penyewa" class="form-control">
                                         </div>
                                     </div>
+
                                     <div class="col-lg-12 mt-3">
                                         <div class="form-group">
                                             <small>Lokasi PC</small>
-                                            <input type="text" name="lokasi_pc" id="lokasi_pc" class="form-control" value="<?= $data['lokasi_pc'] ?>">
+                                            <input type="text" name="lokasi_pc" id="lokasi_pc" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-lg-12 mt-3">
                                         <div class="form-group">
                                             <small>Tanggal Billing</small>
-                                            <input type="date" name="tgl_billing" id="tgl_billing" class="form-control" value="<?= $data['tgl_billing'] ?>">
+                                            <input type="date" name="tgl_billing" id="tgl_billing" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mt-3">
                                         <div class="form-group">
                                             <small>Operator</small>
-                                            <input type="text" name="nama_operator" id="nama_operator" class="form-control" value="<?= $data['nama_operator'] ?>">
+                                            <input type="text" name="nama_operator" id="nama_operator" class="form-control">
                                         </div>
                                     </div>
+                                    
                                     <div class="col-lg-6 mt-3">
                                         <div class="form-group">
-                                            <small>Jenis Paket</small>
+                                            <small>Jenis Paket..</small>
                                             <select name="jenis_paket" id="jenis_paket" class="form-control">
-                                                <option value="">Silahkan Pilih...</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
+                                                <option value="">Silahkan Pilih Paket...</option>
+                                                <?php foreach ($result as $val) { ?>
+                                                    <option value="<?= $val['nama_paket'] ?>"><?= $val['nama_paket'] ?></option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                     </div>
 
+                                    <div class="col-lg-6 mt-3">
+                                        <div class="form-group">
+                                            
+                                        </div>
+                                    </div>  
+
+                                    <div class="col-lg-6 mt-3">
+                                        <div class="form-group">
+                                            <small>Jumlah Beli..</small>
+                                            <input type="text" name="jumlah_beli" id="jumlah_beli" class="form-control">
+                                        </div>
+                                    </div>
+                                    
+
                                     <div class="col-lg-12 mt-4">
-                                        <button type="submit" name="submit" class="btn btn-info text-white"><i class="bi bi-pen"></i> Edit</button>
+                                        <button type="submit" name="submit" class="btn btn-info text-white"><i class="bi bi-save"></i> Add</button>
                                         <a href="view.php" class="btn btn-danger"><i class="bi bi-arrow-left"></i> Cancel</a>
                                     </div>
                                 </div>
