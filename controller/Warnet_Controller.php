@@ -25,25 +25,24 @@
             return $hasil;
         }
 
-        function getJenisData($id)
+        function getJenisData()
         {
-            $hasil = $this->db->prepare("SELECT * FROM tbl_data_warnet");
+            $hasil = $this->model->getJenisData();
             return $hasil;
         }
 
 
         function hapusData()
         {
-            if(isset($_POST['delete']))
-            {
+            if(isset($_POST['delete'])) {
                 $id = $_POST['id'];
 
                 $result = $this->model->hapusData($id);
 
                 if($result){
-                    header("Location:index.php?pesan=success&frm=del");
+                    header("Location:content.php?pesan=success&frm=del");
                 }else{
-                    header("Location:index.php?pesan=gagal&frm=del");
+                    header("Location:content.php?pesan=gagal&frm=del");
                 }
             }
         }
@@ -59,9 +58,10 @@
                 $tgl_billing = $_POST['tgl_billing'];
                 $nama_operator = $_POST['nama_operator'];
                 $jenis_paket = $_POST['jenis_paket'];
-                $jumlah_beli = $_POST['$jumlah_beli'];
+                $jumlah_beli = $_POST['jumlah_beli'];
 
                 $data[] = array(
+                        'Id_billing'       =>$id_billing,
                         'nama_penyewa'     =>$nama_penyewa,
                         'lokasi_pc'        =>$lokasi_pc,
                         'tgl_billing'      =>$tgl_billing,
@@ -70,17 +70,18 @@
                         'jumlah_beli'      =>$jumlah_beli
                 );
 
-            $result = $this->nodel->simpanData($data);
+            $result = $this->model->simpanData($data);
+
                 if($result)
                 {
-                    header("Localtion:index.php?pesan=success&frm=add");
+                    header("Location:content.php?pesan=success&frm=add");
                 }else{
-                    header("Localtion:index.php?pesan=gagal&frm=add");
+                    header("Location:content.php?pesan=gagal&frm=add");
                 }
             }
         }
 
-        function upadateData()
+        function upadateData($id)
         {
             if(isset($_POST['update']))
             {
@@ -90,9 +91,10 @@
                 $tgl_billing = $_POST['tgl_billing'];
                 $nama_operator = $_POST['nama_operator'];
                 $jenis_paket = $_POST['jenis_paket'];
-                $jumlah_beli = $_POST['$jumlah_beli'];
+                $jumlah_beli = $_POST['jumlah_beli'];
 
-                $data[] = array(
+
+                $data = array(
                         'nama_penyewa'     =>$nama_penyewa,
                         'lokasi_pc'        =>$lokasi_pc,
                         'tgl_billing'      =>$tgl_billing,
@@ -101,12 +103,12 @@
                         'jumlah_beli'      =>$jumlah_beli
                 );
 
-            $result = $this->nodel->updateData($data,$id_billing);
+            $result = $this->model->updateData($data,$id);
                 if($result)
                 {
-                    header("Localtion:index.php?pesan=success&frm=edit");
+                    header("Location:content.php?pesan=success&frm=edit");
                 }else{
-                    header("Localtion:index.php?pesan=gagal&frm=edit");
+                    header("Location:content.php?pesan=gagal&frm=edit");
                 }
             }
         }

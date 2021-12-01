@@ -2,7 +2,6 @@
     include '../controller/Warnet_Controller.php';
 
     $ctrl = new WarnetController();
-
     $hasil = $ctrl->index();
 ?>
 
@@ -27,14 +26,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-
-                    <!-- Alert -->
-                    <?php if (isset($_GET['pesan'])) : ?>
-                        <div class="alert alert-<?= $bg ?> alert-dismissible fade show" role="alert">
-                            <strong>Berhasil</strong> <?= $action ?> Data.
-                            <a href="view.php" class="btn-close"></a>
-                        </div>
-                    <?php endif ?>
 
                     <div class="card">
                         <div class="card-header bg-white text-uppercase">
@@ -88,10 +79,12 @@
                                                                         <strong><span class="grt"></span></strong> ?
                                                                         </h4>
                                                                 </div>
+                                                                <form action="<?= $ctrl->hapusData()?>" method="POST">
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                    <button type="button" name="delete" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                                                     <a href="delete_proses.php?id_billing=<?= $val['Id_billing'] ?>" class="btn btn-danger">Delete</a>
                                                                 </div>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>

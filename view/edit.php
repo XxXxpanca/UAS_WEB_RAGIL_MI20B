@@ -32,7 +32,7 @@ $data = $ctrl->getData($id);
                             <div class="h3 text-center">Edit Billing</div>
                         </div>
                         <div class="card-body">
-                            <form action="edit_proses.php?id_billing=<?= $data['Id_billing'] ?>" method="post">
+                            <form action="<?php echo $ctrl->upadateData($id) ?>" method="post" >
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
@@ -68,16 +68,26 @@ $data = $ctrl->getData($id);
                                         <div class="form-group">
                                             <small>Jenis Paket</small>
                                             <select name="jenis_paket" id="jenis_paket" class="form-control">
-                                                <option value="">Silahkan Pilih...</option>
+                                                <option value="<?= $data['jenis_paket'] ?>"><?= $data['jenis_paket'] ?></option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
                                             </select>
                                         </div>
+                                    
+                                    <div class="col-lg-6 mt-3">
+                                        <div class="form-group">
+                                            <small>Jumlah Beli..</small>
+                                            <input type="text" name="jumlah_beli" id="jumlah_beli" class="form-control" value="<?= $data['jumlah_beli'] ?>">
+                                        </div>
                                     </div>
 
+                                    </div>
+
+
+
                                     <div class="col-lg-12 mt-4">
-                                        <button type="submit" name="submit" class="btn btn-info text-white"><i class="bi bi-pen"></i> Edit</button>
+                                        <button type="submit" name="update" class="btn btn-info text-white"><i class="bi bi-pen"></i> Edit</button>
                                         <a href="view.php" class="btn btn-danger"><i class="bi bi-arrow-left"></i> Cancel</a>
                                     </div>
                                 </div>

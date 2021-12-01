@@ -23,14 +23,14 @@ class warnet_model {
 
     function getJenisData()
     {
-        $row = $this->db->prepare("SELECT * FROM tbl_data_warnet");
+        $row = $this->db->prepare("SELECT * FROM tbl_paket");
         $row ->execute();
-        return $hasil = $row->fetch();
+        return $hasil = $row->fetchAll();
     }
 
     function simpanData($data)
     {
-        $rowSQL = array();
+        $rowsSQL = array();
         $toBind = array();
         $columnNames = array_keys($data[0]);
 
@@ -42,33 +42,32 @@ class warnet_model {
                 $params[] = $param;
                 $toBind[$param] = $columnValue;
             }
-            $rowSQL[] = "(" . implode(", ", $params) . ")";
+            $rowsSQL[] = "(" . implode(", ", $params) . ")";
         }
         $sql = "INSERT INTO tbl_data_warnet (" . implode(", ", $columnNames) . ") VALUES " . implode
-        (", ", $rowSQL);
+        (", ", $rowsSQL);
         $row = $this->db->prepare($sql);
 
-        foreach($toBind as $param => $val)
-        {
+        foreach($toBind as $param => $val){
             $row ->bindValue($param, $val);
         }
+        return $row ->execute();
     }
 
     function updateData($data,$id)
     {
         $setPart = array();
-        foreach($data as $key => $value)
+        foreach ($data as $key => $value)
         {
             $setPart[] = $key. "=:" .$key;
         }
 
-        $sql = "UPDATE tbl_data_warnet SET ". implode(',', $setPart). "WHERE id = :id";
+        $sql = "UPDATE tbl_data_warnet SET ". implode(', ', $setPart). " WHERE Id_billing = :id";
 
         $row = $this->db->prepare($sql);
 
-        $row ->bindValue(':id',$id);
-        foreach($data as $param => $val)
-        {
+        $row ->bindValue(':id', $id);
+        foreach($data as $param => $val){
             $row ->bindValue($param, $val);
         }
         return $row ->execute();
@@ -76,7 +75,7 @@ class warnet_model {
 
     function hapusData($id)
     {
-        $sql = "DELETE * FROM tbl_data_warnet where id=?";
+        $sql = "DELETE * FROM tbl_data_warnet WHERE id = ?";
         $row =$this->db->prepare($sql);
         return $row ->execute(array($id));
     }

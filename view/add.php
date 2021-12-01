@@ -1,6 +1,9 @@
 <?php
 include '../controller/Warnet_Controller.php';
 $ctrl = new WarnetController();
+$dataWarnet = $ctrl->getJenisData();
+// $id = $_GET['id_billing'];
+
 ?>
 
 
@@ -28,7 +31,7 @@ $ctrl = new WarnetController();
                             <div class="h3 text-center">Tambah Data Billing</div>
                         </div>
                         <div class="card-body">
-                            <form action="<?php $ctrl->simpanData();?>" method="post">
+                            <form action="<?php echo $ctrl->simpanData();?>" method="post" name="form1">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
@@ -68,7 +71,7 @@ $ctrl = new WarnetController();
                                             <small>Jenis Paket..</small>
                                             <select name="jenis_paket" id="jenis_paket" class="form-control">
                                                 <option value="">Silahkan Pilih Paket...</option>
-                                                <?php foreach ($result as $val) { ?>
+                                                <?php foreach ($dataWarnet as $val) { ?>
                                                     <option value="<?= $val['nama_paket'] ?>"><?= $val['nama_paket'] ?></option>
                                                 <?php } ?>
                                             </select>
@@ -90,7 +93,7 @@ $ctrl = new WarnetController();
                                     
 
                                     <div class="col-lg-12 mt-4">
-                                        <button type="submit" name="submit" class="btn btn-info text-white"><i class="bi bi-save"></i> Add</button>
+                                        <button type="submit" name="simpan" class="btn btn-info text-white"><i class="bi bi-save"></i> Add</button>
                                         <a href="view.php" class="btn btn-danger"><i class="bi bi-arrow-left"></i> Cancel</a>
                                     </div>
                                 </div>
