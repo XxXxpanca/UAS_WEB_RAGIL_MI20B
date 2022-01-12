@@ -18,19 +18,23 @@
            if(isset($_POST['login']))
         {
             session_start();
-            $user = strip_tags($_POST['user']);
-            $pass = strip_tags($_POST['pass']);
-            $result = $this->model->proses_login($user,$pass);
+            if ($_POST['code'] == $_SESSION['code']) {
+                $user = strip_tags($_POST['user']);
+                $pass = strip_tags($_POST['pass']);
+                $result = $this->model->proses_login($user,$pass);
 
-            if($result == 'gagal')
-            { 
-                header("location:login.php");
-            }else{
-                session_start();
-                $_SESSION['nama_pengguna'] = $result['nama_pengguna'];
-                $_SESSION['username'] = $result['username'];
-                header("location:content.php");
-                
+                if($result == 'gagal')
+                { 
+                    header("location:login.php");
+                }else{
+                    session_start();
+                    $_SESSION['nama_pengguna'] = $result['nama_pengguna'];
+                    $_SESSION['username'] = $result['username'];
+                    header("location:content.php");
+                    
+                }
+            } else {
+                header("Location:login.php?captcha=captcha");
             }
          }
       }
