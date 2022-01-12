@@ -13,10 +13,14 @@
             $this->model = new warnet_model($conn); 
         }
 
-           function index ()
-        {
-            $hasil = $this->model->tampil_data();
-            return $hasil;
+           function index (){
+            session_start();
+            if(!empty($_SESSION)){
+             $hasil = $this->model->tampil_data();
+             return $hasil;
+          }else{
+            header("Location:login.php");
+          }
         }
 
         function getData($id)
@@ -28,25 +32,37 @@
         function getJenisData()
         {
             $hasil = $this->model->getJenisData();
-            return $hasil;
+            echo json_encode($hasil);
         }
 
 
         function hapusData()
         {
             if(isset($_POST['delete'])) {
-                $id = $_POST['id'];
+                $id = $_POST['Id_billing'];
 
                 $result = $this->model->hapusData($id);
 
                 if($result){
-                    header("Location:content.php?pesan=success&frm=del");
-                }else{
-                    header("Location:content.php?pesan=gagal&frm=del");
+                //     header("Location:content.php?pesan=success&frm=del");
+                // }else{
+                //     header("Location:content.php?pesan=gagal&frm=del");
                 }
             }
         }
 
+        function set_jenis_data() {
+            $nama_paket = $_POST['nama_paket'];
+            $data[] = array(
+                    'nama_paket'  =>$nama_paket,
+                    'harga'       =>$nama_paket * 3000,
+            );
+
+            $this->model->set_jenis_data($data);
+            $respown['status_code'] = 1;
+            $respown['status'] = 'Success';
+            echo json_encode($respown);
+        }
 
         function simpanData()
         {
@@ -80,6 +96,22 @@
                 }
             }
         }
+        
+        // function add_paket(){
+        //     $jenis_paket = $_POST['JenisPaket'];
+        //     $data[] = array(
+        //         'Jenis_Paket'  =>$jenis_paket,
+        //     );
+
+        //     $result = $this->model->simpanJenisData($data);
+        //         if($result){
+        //             echo '200';
+        //         }else{
+        //             echo '300';
+        //         }
+        // }
+
+
 
         function upadateData($id)
         {
@@ -113,6 +145,13 @@
             }
         }
 
-
+        function Logout(){
+         if(isset($_POST['logout'])){
+            session_start();
+            session_destroy();
+            header('location:login.php?signout=yes');
+        }
     }
+}
+
 ?>

@@ -28,6 +28,32 @@ class warnet_model {
         return $hasil = $row->fetchAll();
     }
 
+    function set_jenis_data($data) {
+        $rowsSQL = array();
+        $toBind = array();
+        $columnNames = array_keys($data[0]);
+
+        foreach($data as $arrayIndex => $row)
+        {
+            $params = array();
+            foreach($row as $columnName => $columnValue){
+                $param = ":" . $columnName . $arrayIndex;
+                $params[] = $param;
+                $toBind[$param] = $columnValue;
+            }
+            $rowsSQL[] = "(" . implode(", ", $params) . ")";
+        }
+        $sql = "INSERT INTO tbl_paket (" . implode(", ", $columnNames) . ") VALUES " . implode
+        (", ", $rowsSQL);
+        $row = $this->db->prepare($sql);
+
+        foreach($toBind as $param => $val){
+            $row ->bindValue($param, $val);
+        }
+        return $row ->execute();
+
+    }
+
     function simpanData($data)
     {
         $rowsSQL = array();
@@ -75,10 +101,9 @@ class warnet_model {
 
     function hapusData($id)
     {
-        $sql = "DELETE * FROM tbl_data_warnet WHERE id = ?";
+        $sql = "DELETE FROM tbl_data_warnet WHERE Id_billing = ?";
         $row =$this->db->prepare($sql);
-        return $row ->execute(array($id));
+        return $row->execute(array($id));
     }
-
 }
 ?>

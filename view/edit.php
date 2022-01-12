@@ -68,7 +68,6 @@ $data = $ctrl->getData($id);
                                         <div class="form-group">
                                             <small>Jenis Paket</small>
                                             <select name="jenis_paket" id="jenis_paket" class="form-control">
-                                                <option value="<?= $data['jenis_paket'] ?>"><?= $data['jenis_paket'] ?></option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
@@ -88,7 +87,7 @@ $data = $ctrl->getData($id);
 
                                     <div class="col-lg-12 mt-4">
                                         <button type="submit" name="update" class="btn btn-info text-white"><i class="bi bi-pen"></i> Edit</button>
-                                        <a href="view.php" class="btn btn-danger"><i class="bi bi-arrow-left"></i> Cancel</a>
+                                        <a href="content.php" class="btn btn-danger"><i class="bi bi-arrow-left"></i> Cancel</a>
                                     </div>
                                 </div>
                             </form>

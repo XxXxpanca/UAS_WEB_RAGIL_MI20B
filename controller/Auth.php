@@ -17,7 +17,7 @@
         {
            if(isset($_POST['login']))
         {
-
+            session_start();
             $user = strip_tags($_POST['user']);
             $pass = strip_tags($_POST['pass']);
             $result = $this->model->proses_login($user,$pass);
@@ -33,6 +33,25 @@
                 
             }
          }
+      }
+
+
+      function acakCaptha()
+      {
+          $aplhabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+          //untuk menyatakan $pass sebagai array
+          $pass = array();
+        
+          //masukan -2 dalam string length
+          $panjangAlpha = strlen($aplhabet) - 2;
+          for ($i = 0; $i < 5; $i++) {
+              $n = rand(0, $panjangAlpha);
+              $pass[] = $aplhabet[$n];
+          }
+
+          //ubah array menjadi string
+          return implode($pass);
       }
   }
 ?>

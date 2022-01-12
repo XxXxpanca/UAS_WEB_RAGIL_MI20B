@@ -22,8 +22,34 @@
 </head>
 
 <body>
+    <!--modal--> 
+    <div class="modal fade" id="logout" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+     <div class="modal-dialog modal-dialog-centered">
+       <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalToggleLabel">Logout</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Apakah anda Yakin keluar Aplikasi ?
+        </div>
+        <div class="modal-footer">
+            <form action="<?= $ctrl->Logout() ?>" method="post">
+                <button class="btn btn-primary" type="submit" name="logout">Logout</button>                                  
+            </form>
+            <button class="btn btn-secondary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Cancel</button>
+         </div>
+        </div>
+      </div>
+    </div>
+
     <div class="main mt-4">
         <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-end mb-4">
+                    <a class="badge bg-info text-decoration-none p-2 text-dark" data-bs-toggle="modal" href="#logout" role="button">Logout</a>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-12">
 
@@ -31,6 +57,7 @@
                         <div class="card-header bg-white text-uppercase">
                             <div class="h3 text-center">Data Billing</div>
                             <div class="float-end">
+                            <a href="report.php" class="badge bg-info py-2 px-2 small text-white fw-bold text-decoration-none"><i class="bi bi-plus"></i>Report</a>
                                 <a href="add.php" class="badge bg-info py-2 px-2 small text-white fw-bold text-decoration-none"><i class="bi bi-plus"></i>Add Billing</a>
                             </div>
                         </div>
@@ -60,7 +87,7 @@
                                                 <td><?= $val['jenis_paket'] ?> Jam</td>
                                                 <td><?= $val['nama_operator'] ?></td>
                                                 <td><?= $val['jumlah_beli'] ?></td>
-                                                <!-- <td>Rp. <?= $val['harga'] ?></td> -->
+                                                <!-- <td>Rp. <?= $val['harga'] ?></td>  -->
                                                 <td>Rp. <?= $val['harga']*$val['jumlah_beli'] ?></td>
                                                 <td>
                                                     <a href="edit.php?id_billing=<?= $val['Id_billing'] ?>" class="badge bg-warning text-dark p-2 text-decoration-none"><i class="bi bi-pen"></i> Edit</a>
@@ -80,9 +107,12 @@
                                                                         </h4>
                                                                 </div>
                                                                 <form action="<?= $ctrl->hapusData()?>" method="POST">
+                                                                <input type="hidden" value="<?= $val['Id_billing'] ?>" name="Id_billing">
                                                                 <div class="modal-footer">
-                                                                    <button type="button" name="delete" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                                    <a href="delete_proses.php?id_billing=<?= $val['Id_billing'] ?>" class="btn btn-danger">Delete</a>
+                                                                    <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                    
+                                                                    <button type="submit" class="btn btn-danger" name="delete" >Delete</button>
+                                                                
                                                                 </div>
                                                                 </form>
                                                             </div>
@@ -101,6 +131,9 @@
             </div>
         </div>
     </div>
+
+    
+
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
