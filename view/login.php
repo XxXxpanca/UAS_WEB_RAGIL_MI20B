@@ -30,6 +30,12 @@
                         <small>Anda Berhasil Logout</small>
                     </div>
                 <?php } ?>
+                <?php if (isset($_GET['captcha'])) : ?>
+                    <div class="alert alert-danger alert-dimissible fade show" role="alert">
+                        <strong>Chaptcha Tidak Sesuai...</strong>
+                        <a href="login.php" class="btn-close"></a>
+                    </div>
+                <?php endif ?>
             </div>
         </div>
             <h2 class="visually-hidden">Login Form</h2>
@@ -38,7 +44,7 @@
             <div class="form-group"><input class="form-control" type="text" name="user" placeholder="Username"></div>
             <div class="form-group"><input class="form-control" type="password" name="pass" placeholder="Password"></div>
            <div  class="form-group" ><img src="captcha.php" alt="gambar" /></div>
-           <div class="form-group"><input class="form-control" type="text" name="nilaiCaptcha" placeholder="Isi Dengan Benar..."></div>
+           <div class="form-group"><input class="form-control" type="text" name="code" placeholder="Isi Dengan Benar..."></div>
            <button class="btn btn-primary d-block w-100" type="submit" name="login">Log In</button>
             <div class="form-group">     
                 <div class="kotak">		
